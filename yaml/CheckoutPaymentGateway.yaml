@@ -1,0 +1,125 @@
+swagger: "2.0"
+info:
+  description: "Checkout.com code challenge. REST API Payment Gateway"
+  version: "1.0.0"
+  title: "Payment Gateway"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "federico.silveri21@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/api"
+schemes:
+  - "http"
+paths:
+  /payment:
+    post:
+      tags:
+        - "Payment"
+      summary: "Make new Payment"
+      description: "Create new Payment"
+      operationId: "saveTransaction"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "A Payment object"
+          required: true
+          schema:
+            $ref: "#/definitions/Payment"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Payment"
+        "400":
+          description: "Invalid Payment"
+  /payment/{paymentId}:
+    get:
+      tags:
+        - "Payment"
+      summary: "Find Payment by PaymentId"
+      description: "Find Payment by id"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "paymentId"
+          in: "path"
+          description: "Payment ID"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "Payment found"
+        "404":
+          description: "Payment not found"
+definitions:
+  Payment:
+    type: "object"
+    required:
+      - "requestId"
+      - "merchantId"
+      - "amount"
+      - "currency"
+      - "cardHolder"
+      - "cardNumber"
+      - "expiryDate"
+      - "cvv"
+    properties:
+      paymentId:
+        type: "string"
+        readOnly: true
+        example: "0825fb1c-779b-482b-ab4b-e52974ebc81a"
+        description: "Payment id set by Payment Gateway"
+      requestId:
+        type: "string"
+        example: "e2f4d10b-e16a-46f2-846c-943b871c8702"
+        description: "Request id set by Merchant"
+      merchantId:
+        type: "string"
+        example: "28f4dc58-2903-443f-8e10-0c01a554f5c2"
+        description: "Merchant id"
+      amount:
+        type: "number"
+        example: "100.00"
+        description: "Payment amount"
+      currency:
+        type: "string"
+        example: "GBP"
+        description: "Payment ISO4217 currency"
+      cardHolder:
+        type: "string"
+        example: "Federico Silveri"
+        description: "CardHolder name"
+      cardNumber:
+        type: "string"
+        example: "5555555555554444"
+        description: "Valid Card Number"
+      expiryDate:
+        type: "string"
+        example: "11/27"
+        description: "Valid Card Expiry Date"
+      cvv:
+        type: "string"
+        example: "123"
+        description: "Valid Card CVV"
+      status:
+        type: "string"
+        readOnly: true
+        example: "AUTHORISED"
+        description: "Authorisation status"
+      description:
+        type: "string"
+        readOnly: true
+        example: "description"
+        description: "Authorisation description message"
+      authorisationCode:
+        type: "string"
+        readOnly: true
+        example: "AUTH123"
+        description: "Authorisation code"

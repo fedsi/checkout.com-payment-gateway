@@ -1,0 +1,2 @@
+INSERT INTO payment (payment_id, request_id, merchant_id, amount, currency, card_holder, card_number, expiry_date, status, description, authorisation_code)
+VALUES (X'95b53506b52b4f6787655b3b16c7f0e1', 'e2f4d10b-e16a-46f2-846c-943b871c8702', '28f4dc58-2903-443f-8e10-0c01a554f5c2', 100.00,  'GBP', 'RmVkZXJpY28gU2lsdmVyaQ==', 'NTU1NTU1NTU1NTU1NDQ0NA==', 'MDgvMjQ=', 'AUTHORISED', null, 'AUTH535');
